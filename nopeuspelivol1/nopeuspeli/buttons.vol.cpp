@@ -1,12 +1,13 @@
 #include "buttons.vol.h"
-extern volatile int buttonNumber;  // Used for communicating button number state
+
+volatile int buttonNumber = -1; // last pressed button
 extern bool gameStarted;  //This variable indicates whether the game has started (true = started, false = not started)
 unsigned long buttonPressStartTime = 0;   // Store the start time of the button press
 bool buttonBeingHeld = false;  // Variable to track if the button is being held down
-volatile int buttonNumber = 0;
+
 
 // DEBOUNCE
-unsigned long lastDebounceTime = 0;
+unsigned long lastDebounceTime = 0; // Last approved moment of pressing button
 const unsigned long debounceDelay = 300;  // 300 milliseconds debounce delay
 
 // BUTTON AND INTERRUPT INITIALIZATION
@@ -26,19 +27,29 @@ void initButtonsAndButtonInterrupts(void) {
 ISR(PCINT2_vect) {
     // Check if the debounce time has elapsed
     unsigned long currentTime = millis();
-    if ((currentTime - lastDebounceTime) > debounceDelay) {
-        // Check which button is pressed and update buttonNumber
-        for (byte pin = firstPin; pin <= lastPin; pin++) {
-            if (digitalRead(pin) == LOW) {  // If the button is pressed
-                buttonNumber = pin;  // Update buttonNumber
-                lastDebounceTime = currentTime;  // Update debounce timer
 
-                Serial.print("Nappi painettu! Pin-numero: ");
-                Serial.println(buttonNumber);
-                break;  // Stop checking at the first pressed button
-                
-            }
-    
-      }
+    // 
+    if ((currentTime - lastDebounceTime) < debounceDelay) {
+        return;
     }
+     
+    // read buttons one by one
+    if(digitalRead(2) == LOW){
+        buttonNumber = 2;
+    }
+    else if(digitalRead(3) == LOW){
+        buttonNumber = 3;
+    }
+    else if(digitalRead(4) == LOW){
+        buttonNumber = 4;
+    }
+    else if(digitalRead(5) == LOW){
+        buttonNumber = 5;
+    }
+    else{
+        //BUTTON WAS NOT PRESSED
+        return;
+    }
+
+    lastDebounceTime = currentTime;
 }
