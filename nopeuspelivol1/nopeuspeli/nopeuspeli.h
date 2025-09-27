@@ -16,7 +16,7 @@
 #define ACCEL_PCT 10        // +10% acceleration for blinking
 
 extern volatile bool newTimerInterrupt;      // Timer 1 reports "next led"
-extern volatile buttonNumber;                // from buttons.vol.cpp (D2..D5; -1 if not pressed)
+extern volatile int buttonNumber;                // from buttons.vol.cpp (D2..D5; -1 if not pressed)
 
 // GAME MODE VARIABLES
 extern uint8_t seq[SEQ_LEN];        // randomlist for 0-3
