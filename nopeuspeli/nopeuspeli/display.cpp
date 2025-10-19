@@ -1,6 +1,6 @@
 #include "display.h"
 
-// Segmenttikoodit numeroille 0–9 (bitit: a–g)
+// Segment codes for numbers 0–9 (bits: a–g)
 const uint8_t segmentCode[10] = {
   0b00111111, // 0
   0b00000110, // 1
@@ -14,6 +14,7 @@ const uint8_t segmentCode[10] = {
   0b01101111  // 9
 };
 
+// Initialize the display by setting up the necessary pins and resetting the display
 void initializeDisplay(void) {
   pinMode(DISPLAY_RESET_PIN, OUTPUT);
   pinMode(DISPLAY_SHIFT_CLOCK, OUTPUT);
@@ -21,13 +22,17 @@ void initializeDisplay(void) {
   pinMode(DISPLAY_OUT_ENABLE, OUTPUT);
   pinMode(DISPLAY_SERIAL_INPUT, OUTPUT);
 
-  // Reset ja aktivoi näyttö
+  // Reset and activate the display
   digitalWrite(DISPLAY_RESET_PIN, LOW);
   delay(10);
   digitalWrite(DISPLAY_RESET_PIN, HIGH);
-  digitalWrite(DISPLAY_OUT_ENABLE, LOW); // Näyttö päälle
+  digitalWrite(DISPLAY_OUT_ENABLE, LOW); // Enable display
 }
 
+// Write a single byte to the display
+// Parameters:
+// - number: The number to display (0–9)
+// - last: Whether this is the last byte in the sequence (latches the data if true)
 void writeByte(uint8_t number, bool last) {
   uint8_t value = segmentCode[number];
 
@@ -43,11 +48,18 @@ void writeByte(uint8_t number, bool last) {
   }
 }
 
+// Write two numbers to the display (tens and ones place)
+// Parameters:
+// - tens: The tens digit to display (0–9)
+// - ones: The ones digit to display (0–9)
 void writeHighAndLowNumber(uint8_t tens, uint8_t ones) {
-  writeByte(tens, false); // Ensimmäinen näyttö
-  writeByte(ones, true);  // Toinen näyttö
+  writeByte(tens, false); // First display
+  writeByte(ones, true);  // Second display 
 }
 
+// Display a two-digit result on the display
+// Parameters:
+// - result: The number to display (0–99)
 void showResult(uint8_t result) {
   uint8_t tens = result / 10;
   uint8_t ones = result % 10;
