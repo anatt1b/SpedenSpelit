@@ -73,6 +73,8 @@ The game consists of four main modules:
 6. **Reset:**  
    - The game can be restarted by pressing a button again.  
 
+![Flow Chart](Flowchart/Flowchart_V2.pdf)
+
 ---
 
 ## 🕹️ User Instructions
