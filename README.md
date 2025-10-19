@@ -85,7 +85,7 @@ The game consists of four main modules:
 6. The score is displayed in real time on the 7-segment display.  
 7. A wrong press ends the game and shows the final score.  
 
-![Wiring Diagram](Kytkentäkaavio.png)
+![Wiring Diagram](Wiring%20schematics/Kytkent%C3%A4kaavio.png)
 
 ---
 
