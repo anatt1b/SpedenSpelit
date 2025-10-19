@@ -1,7 +1,7 @@
 # Speden Spelit – Reaction Game 🎮
 
 **Authors:**  
-Jussi Mitteli, Jere Peltola, Elmo Lehtoniemi, Antti Buller  
+Jussi Mitteli, Jere Peltola, Elmo Lehtosaari, Antti Buller  
 
 ---
 
