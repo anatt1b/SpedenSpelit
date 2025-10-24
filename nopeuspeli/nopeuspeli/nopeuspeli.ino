@@ -18,7 +18,7 @@ uint8_t flashesSinceAccel = 0;      //Game speed accelleration variable
 uint16_t currentLed = 0;             //Current led according to game sequence
 uint8_t score = 0;                  //Score variable
 uint16_t currentHz = START_HZ;      // Game speed variable setting at game start up
-uint8_t gameProgression = 0;        //Variable to track game progression by how many correct button pushes has been made
+uint16_t gameProgression = 0;        //Variable to track game progression by how many correct button pushes has been made
 
 const uint8_t START_BUTTON_INDEX = 3; // D5
 
@@ -49,8 +49,8 @@ void generateSequence(void) {
     }
 }
 //Function to read step values from game sequence
-uint8_t getLedFromSequence(uint8_t index) {
-    uint8_t byteIdx = index / 4;
+uint16_t getLedFromSequence(uint16_t index) {
+    uint16_t byteIdx = index / 4;
     uint8_t shift = (index % 4) * 2;
     return (seq[byteIdx] >> shift) & 0x03;
 }
@@ -121,7 +121,7 @@ void startTheGame() {
 }
 
 
-void checkGame(uint8_t pressedIdx) {
+void checkGame(uint16_t pressedIdx) {
 
     if (!gameRunning) return;
     uint8_t expected = getLedFromSequence(gameProgression);//Reads the expected button to press from game sequence according to game proggression

@@ -19,7 +19,7 @@
 // GAME MODE VARIABLES
 extern volatile bool newTimerInterrupt; 
 extern volatile int buttonNumber;      
-extern bool gameRunning;
+extern bool gameRunning; // Korjattu: Käytetään gameRunning-nimeä
 
 extern uint16_t seq[SEQ_BYTES]; 
 extern uint16_t seqIndex;
@@ -28,16 +28,16 @@ extern uint8_t flashesSinceAccel;
 extern uint16_t currentLed;
 extern uint8_t score; 
 
-// FUNCTION PROTOTYPES (Stays same)
+// FUNCTION PROTOTYPES (Pysyvät samana)
 void generateSequence(void);
-uint8_t getLedFromSequence(uint8_t index);
+uint16_t getLedFromSequence(uint16_t index);
 void blinkAllLeds(void);
 void initializeGame(void);
 void startTheGame(void);
 void setTimer1FrequencyHz(uint16_t hz);
 void initializeTimer(void);
 void increaseSpeed10pct(void);
-void checkGame(uint8_t pressedIdx);
+void checkGame(uint16_t pressedIdx);
 void handleNewLed(void);
 
 #endif
